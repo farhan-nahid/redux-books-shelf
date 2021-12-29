@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext, createContext } from "react";
-import { Route } from "react-router";
-import Login from "../pages/Login";
-import firebase from "./firebase";
-import Preloader from '../components/Preloader'
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import { Route } from 'react-router';
+import Preloader from '../components/Preloader';
+import Login from '../pages/Login';
+import firebase from './firebase';
 const authContext = createContext();
 
 export function AuthProvider({ children }) {
@@ -14,32 +14,15 @@ export const useAuth = () => {
   return useContext(authContext);
 };
 
-export const PrivateRoute = ({
-  component: Component,
-  handleChildFunc,
-  ...rest
-}) => {
+export const PrivateRoute = ({ component: Component, handleChildFunc, ...rest }) => {
   const { user, loginStatus } = useAuth();
-  return (
-    <Route
-      {...rest}
-      render={(props) =>
-        loginStatus.status === "pending" ? (
-          <Preloader />
-        ) : user ? (
-          <Component {...props} />
-        ) : (
-          <Login />
-        )
-      }
-    />
-  );
+  return <Route {...rest} render={(props) => (loginStatus.status === 'pending' ? <Preloader /> : user ? <Component {...props} /> : <Login />)} />;
 };
 
 function useProvideAuth() {
   const [user, setUser] = useState();
   const [loginStatus, setLoginStatus] = useState({
-    status: "idle",
+    status: 'idle',
     error: null,
   });
 
@@ -58,12 +41,12 @@ function useProvideAuth() {
       .then((response) => {
         const formattedUser = formatUser(response.user);
         setUser(formattedUser);
-        setLoginStatus({ status: "resolved", error: null });
+        setLoginStatus({ status: 'resolved', error: null });
         return formattedUser;
       })
       .catch((err) => {
         setUser(null);
-        setLoginStatus({ status: "resolved", error: err.message });
+        setLoginStatus({ status: 'resolved', error: err.message });
       });
   };
 
@@ -73,19 +56,19 @@ function useProvideAuth() {
       .signOut()
       .then(() => {
         setUser(null);
-        setLoginStatus({ status: "idle", error: null });
+        setLoginStatus({ status: 'idle', error: null });
       });
   };
 
   useEffect(() => {
-    setLoginStatus({ status: "pending", error: null });
+    setLoginStatus({ status: 'pending', error: null });
     const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         const formattedUser = formatUser(user);
         setUser(formattedUser);
-        setLoginStatus({ status: "resolved", error: null });
+        setLoginStatus({ status: 'resolved', error: null });
       } else {
-        setLoginStatus({ status: "idle", error: null });
+        setLoginStatus({ status: 'idle', error: null });
         setUser(false);
       }
     });
