@@ -14,7 +14,7 @@ const ReadingList = () => {
       {books.length ? (
         // ,map book data
 
-        books.map((book) => <Book key={book.id} book={book} />)
+        books.map((book) => <Book key={book.id} book={book} remove='no' add='disable' done='no' />)
       ) : (
         <p>
           Looks like you've finished all your books! Check them out in your <Link to='finish'>finished books</Link> or <Link to='/'>discover more</Link>.

@@ -3,21 +3,21 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 
 const Sidebar = () => {
-  const readingList = useSelector((state) => {
-    return state.books.readingList;
+  const allBookList = useSelector((state) => {
+    return state.books;
   });
 
   return (
     <div className='col-md-3'>
       <ul className='list-group sticky-top  py-2'>
         <NavLink as='li' className='list-group-item' to='/' exact>
-          Discover
+          Discover List <span className='badge badge-sm bg-primary'>{allBookList.discoverList.length}</span>
         </NavLink>
         <NavLink as='li' className='list-group-item' to='/reading'>
-          Reading List <span className='badge badge-sm bg-primary'>{readingList.length}</span>
+          Reading List <span className='badge badge-sm bg-primary'>{allBookList.readingList.length}</span>
         </NavLink>
         <NavLink as='li' className='list-group-item' to='/finish'>
-          Finished Books <span className='badge badge-sm bg-primary'>0</span>
+          Finished Books <span className='badge badge-sm bg-primary'>{allBookList.finishedList.length}</span>
         </NavLink>
       </ul>
     </div>

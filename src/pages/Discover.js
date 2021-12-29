@@ -12,9 +12,9 @@ const Discover = () => {
   return (
     <PageLayout>
       {
-        // ,map book data
+        // map book data
         books?.map((book) => (
-          <Book key={book.id} book={book} />
+          <Book key={book.id} book={book} remove='disable' add='no' done='disable' />
         ))
       }
     </PageLayout>
