@@ -43,7 +43,7 @@ const SingleBook = ({ book, remove, add, done }) => {
     <div className='card d-flex mb-3 p-3' style={{ position: 'relative' }}>
       <div className='row'>
         <div className='col-md-3'>
-          <img className='img-fluid' src={coverImageUrl} alt='' />
+          <img className='img-fluid' src={coverImageUrl} alt={title} />
         </div>
         <div className='col-md-9'>
           <div className='card-body'>
@@ -69,7 +69,3 @@ const SingleBook = ({ book, remove, add, done }) => {
 };
 
 export default SingleBook;
-
-/*   ;
-
-  */

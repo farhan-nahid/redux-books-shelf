@@ -10,11 +10,11 @@ const FinishedBooks = () => {
   return (
     <PageLayout>
       {books.length ? (
-        <div>
+        <>
           {books.map((book) => (
             <Book key={book.id} book={book} remove='disable' add='disable' done='disable' />
           ))}
-        </div>
+        </>
       ) : (
         <p>
           Hey there! This is where books will go when you've finished reading them. Get started by heading over to the <Link to='/'>Discover</Link> page to add
