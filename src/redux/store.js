@@ -1,9 +1,10 @@
-import { combineReducers, createStore } from 'redux';
-import { bookReducer } from './reducers/bookReducer';
-import { composeWithDevTools } from 'redux-devtools-extension';
+import { configureStore } from '@reduxjs/toolkit';
+import bookReducer from './features/bookSlice';
 
-const allState = combineReducers({
-  books: bookReducer,
+const store = configureStore({
+  reducer: {
+    books: bookReducer,
+  },
 });
 
-export const store = createStore(allState, composeWithDevTools());
+export default store;

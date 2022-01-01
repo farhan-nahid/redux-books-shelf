@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { HiCheckCircle, HiMinusCircle, HiPlusCircle } from 'react-icons/hi';
 import { useDispatch } from 'react-redux';
-import { addToFinishedList, addToReadingList, removeFromReadingList } from '../../redux/actions/BookActions';
+import { addToFinishedList, addToReadingList, removeFromReadingList } from '../../redux/features/bookSlice';
 import styles from './book.module.css';
 
 const SingleBook = ({ book, remove, add, done }) => {
   const [isMinusDisable, setIsMinusDisable] = useState(true);
   const [isAddDisable, setIsAddDisable] = useState(true);
   const [isDoneDisable, setIsDoneDisable] = useState(true);
-  const { title, author, coverImageUrl, synopsis } = book;
+  const { title, author, coverImageUrl, synopsis, id } = book;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -54,8 +54,8 @@ const SingleBook = ({ book, remove, add, done }) => {
         </div>
       </div>
       <div className={styles.control_icons}>
-        <button disabled={isMinusDisable} onClick={() => dispatch(removeFromReadingList(book.id))}>
-          <HiMinusCircle title='Remove from list' className={styles.minus_icon} />
+        <button disabled={isMinusDisable}>
+          <HiMinusCircle title='Remove from list' className={styles.minus_icon} onClick={() => dispatch(removeFromReadingList(id))} />
         </button>
         <button disabled={isAddDisable} onClick={handelReadingList}>
           <HiPlusCircle title='Add to Reading' className={styles.plus_icon} />
@@ -69,3 +69,7 @@ const SingleBook = ({ book, remove, add, done }) => {
 };
 
 export default SingleBook;
+
+/*   ;
+
+  */

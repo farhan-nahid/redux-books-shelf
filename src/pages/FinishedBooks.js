@@ -5,15 +5,16 @@ import Book from '../components/Book/Book';
 import PageLayout from '../components/PageLayout/PageLayout';
 
 const FinishedBooks = () => {
-  const books = useSelector((state) => {
-    return state.books.finishedList;
-  });
+  const books = useSelector((state) => state.books.finishedList);
 
   return (
     <PageLayout>
       {books.length ? (
-        // ,map book data
-        books.map((book) => <Book key={book.id} book={book} remove='disable' add='disable' done='disable' />)
+        <div>
+          {books.map((book) => (
+            <Book key={book.id} book={book} remove='disable' add='disable' done='disable' />
+          ))}
+        </div>
       ) : (
         <p>
           Hey there! This is where books will go when you've finished reading them. Get started by heading over to the <Link to='/'>Discover</Link> page to add
@@ -25,3 +26,8 @@ const FinishedBooks = () => {
 };
 
 export default FinishedBooks;
+
+/* 
+books.map((book) => <Book key={book.id} book={book} remove='disable' add='disable' done='disable' />
+
+*/
